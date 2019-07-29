@@ -1,0 +1,34 @@
+<div class="container custom-container-2">
+
+  <div class="form-group">
+    <input type="text" [(ngModel)]='searchValue' class="form-control" placeholder="type here">
+  </div>
+  <div class="form-group">
+    <button class="btn btn-success btn-lg btn-block" (click)="performSearch(searchValue)()">Search</button>
+  </div>
+
+  <table *ngIf="searchResult.hits.size != 0">
+    <thead>
+      <tr>
+        <td> Created At </td>
+        <td> Title </td>
+        <td> Url </td>
+        <td> Author </td>
+        <td> Points </td>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of searchResult.hits | paginate: config">
+        <td>{{item.created_at}}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.url}}</td>
+        <td>{{item.author}}</td>
+        <td>{{item.points}}</td>
+        
+      </tr>
+    </tbody>
+  </table>
+
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</div>
